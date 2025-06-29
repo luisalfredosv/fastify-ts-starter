@@ -1,11 +1,11 @@
 import type { FastifyPluginAsync } from "fastify";
 import { z } from "zod/v4";
 import { healthcheckController } from "./healthcheck.controller";
-import { healthcheckResponseSchema } from "./healthcheck.schema";
+import { healthCheckResponseSchema } from "./healthcheck.schema";
 
-const healthcheckRouter: FastifyPluginAsync = async (fastify) => {
+const healthCheckRouter: FastifyPluginAsync = async (fastify) => {
 	fastify.route<{
-		Reply: z.infer<typeof healthcheckResponseSchema>;
+		Reply: z.infer<typeof healthCheckResponseSchema>;
 	}>({
 		method: "GET",
 		url: "/",
@@ -14,11 +14,11 @@ const healthcheckRouter: FastifyPluginAsync = async (fastify) => {
 			description: "Devuelve un status y timestamp para monitorización",
 			tags: ["Health"],
 			response: {
-				200: healthcheckResponseSchema,
+				200: healthCheckResponseSchema,
 			},
 		},
 		handler: healthcheckController,
 	});
 };
 
-export default healthcheckRouter;
+export default healthCheckRouter;

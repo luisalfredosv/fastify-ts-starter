@@ -8,5 +8,3 @@ export const exampleResponseSchema = z.object({
 	message: z.string(),
 	timestamp: z.string().datetime(),
 });
-
-z.globalRegistry.add(exampleResponseSchema, { id: "User" });

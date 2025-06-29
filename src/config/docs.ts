@@ -16,9 +16,8 @@ export default fp(async (fastify: FastifyInstance) => {
 			info: {
 				title: "Service Docs",
 				version: "1.0.0",
-				description: "Documentación de la API",
+				description: "Documentation for the service",
 			},
-			servers: [{ url: `http://localhost:${env.SERVER_PORT}/api` }],
 		},
 		transform: jsonSchemaTransform,
 		transformObject: jsonSchemaTransformObject,

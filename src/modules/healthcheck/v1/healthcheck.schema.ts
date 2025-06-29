@@ -1,6 +1,6 @@
 import { z } from "zod/v4";
 
-export const healthcheckResponseSchema = z.object({
+export const healthCheckResponseSchema = z.object({
 	status: z.string(),
-	timestamp: z.string().datetime(),
+	timestamp: z.iso.datetime(),
 });
