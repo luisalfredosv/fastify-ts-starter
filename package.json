@@ -19,17 +19,17 @@
     "@fastify/swagger": "^9.5.1",
     "@fastify/swagger-ui": "^5.2.3",
     "axios": "^1.10.0",
-    "dotenv": "^16.5.0",
-    "fastify": "^5.3.3",
+    "dotenv": "^17.0.0",
+    "fastify": "^5.4.0",
     "fastify-type-provider-zod": "^5.0.1",
     "pino": "^9.7.0",
-    "zod": "^3.25.61"
+    "zod": "^3.25.67"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.0.6",
     "@types/jest": "^30.0.0",
     "@types/json-schema": "^7.0.15",
-    "@types/node": "^24.0.0",
+    "@types/node": "^24.0.7",
     "husky": "^9.1.7",
     "jest": "^30.0.3",
     "ts-jest": "^29.4.0",

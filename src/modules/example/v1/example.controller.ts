@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import type { z } from "zod";
+import { z } from "zod/v4";
 import type { exampleRequestSchema } from "./example.schema";
 
 type ExampleRequest = FastifyRequest<{
@@ -8,7 +8,7 @@ type ExampleRequest = FastifyRequest<{
 
 export const exampleController = async (
 	request: ExampleRequest,
-	reply: FastifyReply,
+	reply: FastifyReply
 ) => {
 	const { name } = request.body;
 	return reply
