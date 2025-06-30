@@ -9,7 +9,17 @@
     "lint": "biome check ./src --fix",
     "format": "biome format ./src --fix",
     "test": "jest",
-    "test:view": "npx majestic"
+    "test:view": "npx majestic",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "biome check --apply",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "jest --bail --findRelatedTests"
+    ]
   },
   "author": "Luis Sarabia",
   "license": "ISC",
@@ -32,6 +42,7 @@
     "@types/node": "^24.0.7",
     "husky": "^9.1.7",
     "jest": "^30.0.3",
+    "lint-staged": "^16.1.2",
     "ts-jest": "^29.4.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
