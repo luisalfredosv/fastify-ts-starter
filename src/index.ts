@@ -4,13 +4,13 @@ import { env } from "./config/envs";
 const server = buildServer();
 
 server.listen(
-	{ port: env.SERVER_PORT, host: env.SERVER_HOST },
-	(err, address) => {
-		if (err) {
-			server.log.error(err);
-			process.exit(1);
-		}
+  { port: env.SERVER_PORT, host: env.SERVER_HOST },
+  (err, address) => {
+    if (err) {
+      server.log.error(err);
+      process.exit(1);
+    }
 
-		server.log.info(`Server listening at ${address}`);
-	},
+    server.log.info(`Server listening at ${address}`);
+  },
 );
