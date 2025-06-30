@@ -19,25 +19,16 @@ export default fp(
 				request: FastifyRequest,
 				reply: FastifyReply
 			) => {
-				// 1) Validaciones de esquema (ajv o fastify-type-provider-zod)
 				if (Array.isArray(error.validation)) {
-					const grouped: Record<string, string[]> = {};
-
-					for (const errItem of error.validation) {
-						const path =
-							typeof errItem.instancePath === "string"
-								? errItem.instancePath
-								: "";
-						const field = path.replace(/^\/+/, "") || "field";
-						const msg = errItem.message ?? "Invalid value";
-						grouped[field] = grouped[field] || [];
-						grouped[field].push(msg);
-					}
-
-					return reply.status(400).send({ errors: [grouped] });
+					const errors = error.validation.map((errItem) => ({
+						field:
+							(errItem.instancePath ?? "").replace(/^\/+/, "") ||
+							"field",
+						message: errItem.message ?? "Invalid value",
+					}));
+					return reply.status(400).send({ errors });
 				}
 
-				// 2) Otros errores: log interno y envío genérico
 				server.log.error(
 					{ err: error, method: request.method, url: request.url },
 					"Unhandled error in the request"
