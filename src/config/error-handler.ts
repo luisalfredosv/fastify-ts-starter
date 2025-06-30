@@ -8,9 +8,12 @@ import fp from "fastify-plugin";
 
 export default fp(
   async function errorHandler(server: FastifyInstance) {
+    server.register(require("@fastify/sensible"));
+
     server.setErrorHandler(
       (
         error: FastifyError & {
+          statusCode?: number;
           validation?: Array<{
             message?: string;
             instancePath?: string;
@@ -24,12 +27,12 @@ export default fp(
             field: (errItem.instancePath ?? "").replace(/^\/+/, "") || "field",
             message: errItem.message ?? "Invalid value",
           }));
-          return reply.status(400).send({ errors });
+          return reply.status(400).send({ status: "error", code: 400, errors });
         }
 
         server.log.error(
           { err: error, method: request.method, url: request.url },
-          "Unhandled error in the request",
+          "Unhandled error in request",
         );
 
         const status =
@@ -37,11 +40,15 @@ export default fp(
             ? error.statusCode
             : 500;
 
-        const payload: Record<string, unknown> = {
+        const payload: Record<string, any> = {
+          status: "error",
+          code: status,
           error: error.name,
-          message: error.message,
+          message:
+            error.message || (status === 500 ? "Internal Server Error" : ""),
         };
-        if (process.env.NODE_ENV !== "production") {
+
+        if (process.env.NODE_ENV !== "production" && error.stack) {
           payload.stack = error.stack;
         }
 
@@ -49,7 +56,5 @@ export default fp(
       },
     );
   },
-  {
-    name: "error-handler",
-  },
+  { name: "error-handler" },
 );

@@ -1,10 +1,11 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
 
-export const healthcheckController = async (
+import { getHealthStatusUseCase } from "./use-cases/get-health-status.use-case";
+
+export const healthCheckController = async (
   _request: FastifyRequest,
   reply: FastifyReply,
 ) => {
-  return reply
-    .code(200)
-    .send({ status: "ok", timestamp: new Date().toISOString() });
+  const result = getHealthStatusUseCase();
+  return reply.code(200).send(result);
 };

@@ -1,7 +1,7 @@
 import type { FastifyPluginAsync } from "fastify";
 import type { z } from "zod/v4";
 
-import { healthcheckController } from "./healthcheck.controller";
+import { healthCheckController } from "./healthcheck.controller";
 import { healthCheckResponseSchema } from "./healthcheck.schema";
 
 const healthCheckRouter: FastifyPluginAsync = async (fastify) => {
@@ -18,7 +18,7 @@ const healthCheckRouter: FastifyPluginAsync = async (fastify) => {
         200: healthCheckResponseSchema,
       },
     },
-    handler: healthcheckController,
+    handler: healthCheckController,
   });
 };
 

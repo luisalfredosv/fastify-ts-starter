@@ -13,6 +13,7 @@ RUN npm run build
 RUN npm test
 
 FROM node:22-alpine AS runner
+ENV NODE_ENV=production
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 

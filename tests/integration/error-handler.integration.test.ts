@@ -1,0 +1,42 @@
+import fastify from "fastify";
+import { buildServer } from "../../src/app";
+
+describe("Error Handler Integration Tests", () => {
+	let app: ReturnType<typeof fastify>;
+
+	beforeAll(async () => {
+		app = buildServer();
+		await app.ready();
+	});
+
+	afterAll(async () => {
+		await app.close();
+	});
+
+	it("should return 400 for missing body fields in POST /api/v1/example", async () => {
+		const response = await app.inject({
+			method: "POST",
+			url: "/api/v1/example",
+			payload: {},
+		});
+		const body = JSON.parse(response.payload);
+
+		expect(response.statusCode).toBe(400);
+		expect(body.status).toBe("error");
+		expect(body.code).toBe(400);
+		expect(Array.isArray(body.errors)).toBe(true);
+	});
+
+	it("should return 200 for valid request", async () => {
+		const response = await app.inject({
+			method: "POST",
+			url: "/api/v1/example",
+			payload: { name: "Luis" },
+		});
+		const body = JSON.parse(response.payload);
+
+		expect(response.statusCode).toBe(200);
+		expect(body.status).toBe("ok");
+		expect(body.message).toContain("Hola Luis");
+	});
+});
