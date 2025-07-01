@@ -26,7 +26,7 @@ describe("POST /api/v1/example", () => {
 		expect(body).toHaveProperty("timestamp");
 	});
 
-	it("debe responder 400 si el nombre es muy corto", async () => {
+	it("You should answer 400 if the name is too short.", async () => {
 		const resp = await app.inject({
 			method: "POST",
 			url: "/api/v1/example",

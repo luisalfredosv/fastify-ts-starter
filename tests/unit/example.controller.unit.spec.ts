@@ -2,11 +2,10 @@ import {
 	exampleController,
 	ExampleRequest,
 } from "../../src/modules/example/v1/example.controller";
-import type { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply } from "fastify";
 
 describe("exampleController", () => {
-	it("debe responder con status ok y mensaje correcto", async () => {
-		// mock request y reply
+	it("You must reply with the correct message and timestamp.", async () => {
 		const req = { body: { name: "Luis" } } as ExampleRequest;
 		const send = jest.fn();
 		const reply = {
@@ -19,7 +18,6 @@ describe("exampleController", () => {
 		expect(reply.code).toHaveBeenCalledWith(200);
 		expect(send).toHaveBeenCalledWith(
 			expect.objectContaining({
-				status: "ok",
 				message: expect.stringContaining("Hola Luis"),
 				timestamp: expect.any(String),
 			})

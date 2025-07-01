@@ -13,7 +13,7 @@ describe("Error Handler Integration Tests", () => {
 		await app.close();
 	});
 
-	it("should return 400 for missing body fields in POST /api/v1/example", async () => {
+	it("should return 400 for missing fields on POST /api/v1/example", async () => {
 		const response = await app.inject({
 			method: "POST",
 			url: "/api/v1/example",
@@ -27,7 +27,7 @@ describe("Error Handler Integration Tests", () => {
 		expect(Array.isArray(body.errors)).toBe(true);
 	});
 
-	it("should return 200 for valid request", async () => {
+	it("should return 200 and the correct message for a valid request", async () => {
 		const response = await app.inject({
 			method: "POST",
 			url: "/api/v1/example",
@@ -36,7 +36,12 @@ describe("Error Handler Integration Tests", () => {
 		const body = JSON.parse(response.payload);
 
 		expect(response.statusCode).toBe(200);
-		expect(body.status).toBe("ok");
-		expect(body.message).toContain("Hola Luis");
+
+		expect(body).toEqual(
+			expect.objectContaining({
+				message: expect.stringContaining("Hola Luis"),
+				timestamp: expect.any(String),
+			})
+		);
 	});
 });

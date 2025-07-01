@@ -12,7 +12,7 @@ describe("buildServer()", () => {
 		process.env.NODE_ENV = undefined;
 	});
 
-	it("levanta y responde healthCheck", async () => {
+	it("raise and answer healthCheck", async () => {
 		process.env.NODE_ENV = "development";
 		app = buildServer();
 		await app.ready();

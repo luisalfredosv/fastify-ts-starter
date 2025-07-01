@@ -3,8 +3,6 @@ import axios from "axios";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
-import * as config from "./env";
-
 declare module "fastify" {
   interface FastifyInstance {
     httpClient: AxiosInstance;
@@ -50,4 +48,4 @@ export async function httpClient(
   server.decorate("httpClient", client);
 }
 
-export default fp(httpClient, { name: "http-client" });
+export default fp(httpClient, { name: "httpClient" });
