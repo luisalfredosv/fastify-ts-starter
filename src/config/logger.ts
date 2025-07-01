@@ -1,6 +1,6 @@
 import pino from "pino";
 
-import { env } from "../config/envs";
+import { env } from "./env";
 
 const isDev = env.NODE_ENV !== "production";
 const level = env.LOG_LEVEL || (isDev ? "debug" : "info");

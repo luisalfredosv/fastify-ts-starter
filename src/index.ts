@@ -1,5 +1,5 @@
 import { buildServer } from "./app";
-import { env } from "./config/envs";
+import { env } from "./config/env";
 
 const server = buildServer();
 

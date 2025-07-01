@@ -8,8 +8,6 @@ import {
   type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 
-import { env } from "./envs";
-
 export default fp(async (fastify: FastifyInstance) => {
   fastify.register(swagger, {
     openapi: {

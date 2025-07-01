@@ -3,7 +3,7 @@ import axios from "axios";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
-import * as config from "./envs";
+import * as config from "./env";
 
 declare module "fastify" {
   interface FastifyInstance {

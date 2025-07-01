@@ -8,13 +8,16 @@ const envSchema = z.object({
     .string()
     .transform((s) => {
       const n = Number(s);
-      if (Number.isNaN(n)) throw new Error("SERVER_PORT debe ser un número");
+      if (Number.isNaN(n)) throw new Error("SERVER_PORT must be a number");
       return n;
     })
-    .refine((n) => n > 0 && n < 65536, "Puerto fuera de rango"),
+    .refine(
+      (n) => n > 0 && n < 65536,
+      "SERVER_PORT must be between 1 and 65535",
+    ),
   SERVER_HOST: z
     .string()
-    .nonempty("SERVER_HOST no puede estar vacío")
+    .nonempty("SERVER_HOST do not be empty  or null")
     .default("0.0.0.0"),
   NODE_ENV: z
     .enum(["development", "production", "test"])
@@ -25,7 +28,7 @@ const envSchema = z.object({
 
 const parsed = envSchema.safeParse(process.env);
 if (!parsed.success) {
-  console.error("Error en variables de entorno:", parsed.error.format());
+  console.error("Error en variables de entorno:", z.treeifyError(parsed.error));
   process.exit(1);
 }
 

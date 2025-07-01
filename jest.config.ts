@@ -1,13 +1,13 @@
 import type { Config } from "@jest/types";
 
 const config: Config.InitialOptions = {
-	transform: {
-		"^.+.tsx?$": ["ts-jest", { tsconfig: "tsconfig.json" }],
-	},
-	globals: {
-		"ts-jest": { tsconfig: "tsconfig.json" },
-	},
+	preset: "ts-jest",
 	testEnvironment: "node",
+
+	transform: {
+		"^.+\\.tsx?$": ["ts-jest", { tsconfig: "tsconfig.json" }],
+	},
+
 	testMatch: [
 		"<rootDir>/tests/unit/**/*.unit.spec.ts",
 		"<rootDir>/tests/integration/**/*.integration.test.ts",

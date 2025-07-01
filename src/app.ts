@@ -6,7 +6,7 @@ import {
 } from "fastify-type-provider-zod";
 
 import docs from "./config/docs";
-import { env } from "./config/envs";
+import { env } from "./config/env";
 import errorHandler from "./config/error-handler";
 import { helmetConfig } from "./config/helmet";
 import { httpClient } from "./config/http-client";
