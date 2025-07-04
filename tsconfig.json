@@ -6,11 +6,18 @@
 		"noImplicitAny": true,
 		"esModuleInterop": true,
 		"outDir": "./dist",
-		"rootDir": "./src",
+		"rootDir": "./",
 		"resolveJsonModule": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		"baseUrl": "./src",
+		"paths": {
+			"@config/*": ["config/*"],
+			"@modules/*": ["modules/*"],
+			"@utils/*": ["utils/*"],
+			"@app*": ["app.ts"]
+		}
 	},
-	"include": ["src"],
+	"include": ["src", "tests"],
 	"typeRoots": ["src/types", "node_modules/@types"],
 	"exclude": ["node_modules", "dist", "src/**/*.test.ts"]
 }

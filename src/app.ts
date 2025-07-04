@@ -1,37 +1,37 @@
 import fastify from "fastify";
 import {
-  serializerCompiler,
-  validatorCompiler,
-  type ZodTypeProvider,
+	serializerCompiler,
+	validatorCompiler,
+	type ZodTypeProvider,
 } from "fastify-type-provider-zod";
 
-import docs from "./config/docs";
-import { env } from "./config/env";
-import errorHandler from "./config/error-handler";
-import { helmetConfig } from "./config/helmet";
-import { httpClient } from "./config/http-client";
-import { logger } from "./config/logger";
-import routes from "./modules";
+import docs from "@config/docs";
+import { env } from "@config/env";
+import errorHandler from "@config/error-handler";
+import { helmetConfig } from "@config/helmet";
+import { httpClient } from "@config/http-client";
+import { logger } from "@config/logger";
+import routes from "@modules/index";
 
 export function buildServer() {
-  const isProduction = env.NODE_ENV === "production";
+	const isProduction = env.NODE_ENV === "production";
 
-  const server = fastify({
-    loggerInstance: logger,
-  }).withTypeProvider<ZodTypeProvider>();
+	const server = fastify({
+		loggerInstance: logger,
+	}).withTypeProvider<ZodTypeProvider>();
 
-  server.register(errorHandler);
+	server.register(errorHandler);
 
-  server.setValidatorCompiler(validatorCompiler);
-  server.setSerializerCompiler(serializerCompiler);
+	server.setValidatorCompiler(validatorCompiler);
+	server.setSerializerCompiler(serializerCompiler);
 
-  if (!isProduction) {
-    server.register(docs);
-  }
+	if (!isProduction) {
+		server.register(docs);
+	}
 
-  server.register(helmetConfig);
-  server.register(httpClient);
-  server.register(routes, { prefix: "/api" });
+	server.register(helmetConfig);
+	server.register(httpClient);
+	server.register(routes, { prefix: "/api" });
 
-  return server;
+	return server;
 }
