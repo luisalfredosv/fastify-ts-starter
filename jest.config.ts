@@ -36,7 +36,7 @@ const config: Config.InitialOptions = {
 		NODE_ENV: "test",
 		FASTIFY_LOG_LEVEL: "silent",
 	},
-	roots: ["<rootDir>/src"],
+	roots: ["<rootDir>/tests"],
 	transformIgnorePatterns: ["<rootDir>/node_modules/"],
 	moduleDirectories: ["node_modules", "src"],
 };

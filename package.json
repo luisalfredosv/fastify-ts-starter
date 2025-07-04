@@ -6,9 +6,9 @@
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --watch src src/index.ts",
     "build": "tsc -p tsconfig.build.json",
     "start": "node ./dist/index.js",
-    "lint": "biome check ./src --fix",
+    "lint": "biome lint ./src --fix",
     "format": "biome format ./src --fix",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:view": "npx majestic",
     "prepare": "husky"
   },

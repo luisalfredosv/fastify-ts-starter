@@ -1,7 +1,8 @@
+import { isProduction } from "@utils/is-production";
 import { configDotenv } from "dotenv";
 import { z } from "zod/v4";
 
-configDotenv();
+configDotenv({ debug: isProduction() ? false : true });
 
 const envSchema = z.object({
   SERVER_PORT: z

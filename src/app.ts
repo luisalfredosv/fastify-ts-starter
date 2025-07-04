@@ -5,6 +5,7 @@ import { helmetConfig } from "@config/helmet";
 import { httpClient } from "@config/http-client";
 import { logger } from "@config/logger";
 import routes from "@modules/index";
+import { isProduction } from "@utils/is-production";
 import fastify from "fastify";
 import {
   serializerCompiler,
@@ -13,7 +14,7 @@ import {
 } from "fastify-type-provider-zod";
 
 export function buildServer() {
-  const isProduction = env.NODE_ENV === "production";
+  const isProd = isProduction();
 
   const server = fastify({
     loggerInstance: logger,
@@ -24,7 +25,7 @@ export function buildServer() {
   server.setValidatorCompiler(validatorCompiler);
   server.setSerializerCompiler(serializerCompiler);
 
-  if (!isProduction) {
+  if (!isProd) {
     server.register(docs);
   }
 
