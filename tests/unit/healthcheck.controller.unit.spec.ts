@@ -1,5 +1,5 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { healthCheckController } from "../../src/modules/healthcheck/v1/healthcheck.controller";
+import { healthCheckController } from "@modules/healthcheck/v1/healthcheck.controller";
 
 describe("healthCheckController", () => {
 	it("returns status ok and valid timestamp", async () => {

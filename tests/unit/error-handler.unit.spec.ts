@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import { ZodError, ZodIssueCode, ZodIssue } from "zod";
-import errorHandler from "../../src/config/error-handler";
+import errorHandler from "@config/error-handler";
 import {
 	serializerCompiler,
 	validatorCompiler,

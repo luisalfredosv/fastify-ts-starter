@@ -1,4 +1,4 @@
-import { sayHelloUseCase } from "../../src/modules/example/v1/use-cases/say-hello.use-case";
+import { sayHelloUseCase } from "@modules/example/v1/use-cases/say-hello.use-case";
 describe("sayHelloUseCase", () => {
 	it("should return a greeting message and a timestamp", () => {
 		const input = { name: "Juan" };

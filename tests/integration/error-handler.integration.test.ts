@@ -1,5 +1,5 @@
 import fastify from "fastify";
-import { buildServer } from "../../src/app";
+import { buildServer } from "@app";
 
 describe("Error Handler Integration Tests", () => {
 	let app: ReturnType<typeof fastify>;

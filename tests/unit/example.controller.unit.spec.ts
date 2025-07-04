@@ -1,7 +1,7 @@
 import {
 	exampleController,
 	ExampleRequest,
-} from "../../src/modules/example/v1/example.controller";
+} from "@modules/example/v1/example.controller";
 import type { FastifyReply } from "fastify";
 
 describe("exampleController", () => {

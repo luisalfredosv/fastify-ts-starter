@@ -1,5 +1,5 @@
 import type { fastify } from "fastify";
-import { buildServer } from "../../src/app";
+import { buildServer } from "@app";
 
 describe("GET /api/v1/healthcheck", () => {
 	let app: ReturnType<typeof fastify>;

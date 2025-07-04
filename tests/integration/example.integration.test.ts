@@ -1,4 +1,4 @@
-import { buildServer } from "../../src/app";
+import { buildServer } from "@app";
 import type { fastify } from "fastify";
 
 describe("POST /api/v1/example", () => {

@@ -1,4 +1,4 @@
-import { getHealthStatusUseCase } from "../../src/modules/healthcheck/v1/use-cases/get-health-status.use-case";
+import { getHealthStatusUseCase } from "@modules/healthcheck/v1/use-cases/get-health-status.use-case";
 describe("getHealthStatusUseCase", () => {
 	it("should return status ok and a valid timestamp", () => {
 		const result = getHealthStatusUseCase();
