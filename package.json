@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node ./dist/index.js",
     "lint": "biome lint ./src --fix",
-    "format": "biome format ./src --fix",
+    "format": "biome check ./src --fix",
     "test": "jest --passWithNoTests",
     "test:view": "npx majestic",
     "prepare": "husky"

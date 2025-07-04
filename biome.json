@@ -8,7 +8,7 @@
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
-			"**",
+			"src/**",
 			"!**/node_modules",
 			"!**/dist",
 			"!**/coverage"
@@ -50,6 +50,11 @@
 					"options": {
 						"groups": [
 							":PACKAGE:",
+							":BLANK_LINE:",
+							"@config/**",
+							"@app",
+							"@modules/**",
+							"@utils/**",
 							":BLANK_LINE:",
 							":PATH:"
 						]

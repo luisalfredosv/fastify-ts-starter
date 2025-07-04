@@ -1,0 +1,8 @@
+{
+	"biome.lsp.bin": {
+		"configurationPath": "./biome.json"
+	},
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit"
+	}
+}
