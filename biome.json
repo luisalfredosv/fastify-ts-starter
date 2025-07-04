@@ -51,11 +51,6 @@
 						"groups": [
 							":PACKAGE:",
 							":BLANK_LINE:",
-							"@config/**",
-							"@app",
-							"@modules/**",
-							"@utils/**",
-							":BLANK_LINE:",
 							":PATH:"
 						]
 					}

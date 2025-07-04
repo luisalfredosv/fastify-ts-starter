@@ -14,7 +14,7 @@
 			"@config/*": ["config/*"],
 			"@modules/*": ["modules/*"],
 			"@utils/*": ["utils/*"],
-			"@app*": ["app.ts"]
+			"@app": ["app.ts"]
 		}
 	},
 	"include": ["src", "tests"],

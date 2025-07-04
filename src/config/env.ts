@@ -1,46 +1,54 @@
-import { isProduction } from "@utils/is-production";
-import { configDotenv } from "dotenv";
-import { z } from "zod/v4";
+import { config as loadEnv } from "dotenv";
+import { z } from "zod";
 
-configDotenv({ debug: isProduction() ? false : true });
+loadEnv({ debug: process.env.NODE_ENV !== "production" });
 
-const envSchema = z.object({
-	SERVER_PORT: z
-		.string()
-		.transform((s) => {
-			const n = Number(s);
-			if (Number.isNaN(n))
-				throw new Error("SERVER_PORT must be a number");
-			return n;
-		})
-		.refine(
-			(n) => n > 0 && n < 65536,
-			"SERVER_PORT must be between 1 and 65535"
-		),
-	SERVER_HOST: z
-		.string()
-		.nonempty("SERVER_HOST do not be empty  or null")
-		.default("0.0.0.0"),
-	SERVER_PREFIX: z
-		.string()
-		.default("/api")
-		.transform((s) => (s.startsWith("/") ? s : `/${s}`))
-		.refine(
-			(s) => s.endsWith("/"),
-			"SERVER_PREFIX must end with a slash (/)"
-		),
-	NODE_ENV: z
-		.enum(["development", "production", "test"])
-		.optional()
-		.default("development"),
-	LOG_LEVEL: z.string().optional().default("debug"),
-});
+const EnvSchema = z
+	.object({
+		SERVER_PORT: z.preprocess((val) => {
+			const str = z.string().parse(val);
+			const num = Number.parseInt(str, 10);
+			if (Number.isNaN(num))
+				throw new Error("SERVER_PORT must be a valid integer");
+			return num;
+		}, z.number().int("SERVER_PORT must be an integer").positive("SERVER_PORT must be > 0").max(65535, "SERVER_PORT must be ≤ 65535")),
+		SERVER_HOST: z
+			.string()
+			.nonempty("SERVER_HOST cannot be empty")
+			.default("0.0.0.0"),
 
-const parsed = envSchema.safeParse(process.env);
+		SERVER_PREFIX: z
+			.string()
+			.default("/api")
+			.transform((s) => {
+				let prefix = s.startsWith("/") ? s : `/${s}`;
+				if (!prefix.endsWith("/")) prefix += "/";
+				return prefix;
+			}),
+		SERVER_DOCS_PATH: z
+			.string()
+			.default("docs")
+			.transform((s) => s.replace(/^\/|\/$/g, "")),
+
+		NODE_ENV: z
+			.enum(["development", "production", "test"])
+			.default("development"),
+
+		LOG_LEVEL: z
+			.string()
+			.nonempty("LOG_LEVEL cannot be empty")
+			.default("debug"),
+	})
+	.transform((cfg) => ({
+		...cfg,
+		SERVER_DOCS: `${cfg.SERVER_PREFIX}${cfg.SERVER_DOCS_PATH}`,
+	}));
+
+const parsed = EnvSchema.safeParse(process.env);
 if (!parsed.success) {
 	console.error(
-		"Error en variables de entorno:",
-		z.treeifyError(parsed.error)
+		"❌ Environment variable validation failed:",
+		parsed.error.format()
 	);
 	process.exit(1);
 }
