@@ -29,9 +29,7 @@ export default fp(async (fastify: FastifyInstance) => {
 			defaultModelsExpandDepth: 1,
 		},
 		staticCSP: true,
-		transformSpecification: (swaggerObject) => {
-			return swaggerObject;
-		},
+		transformSpecification: (swaggerObject) => swaggerObject,
 		transformSpecificationClone: true,
 	});
 });

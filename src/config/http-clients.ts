@@ -23,7 +23,7 @@ export async function httpClient(
 	});
 
 	const ipify = axios.create({
-		baseURL: "https://api64.ipify.org?format=json",
+		baseURL: "https://api64.ipify.org",
 		timeout: 5000,
 		headers: {
 			"Content-Type": "application/json",
