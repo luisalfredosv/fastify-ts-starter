@@ -1,7 +1,7 @@
 import { config as loadEnv } from "dotenv";
-import { z } from "zod";
+import { z } from "zod/v4";
 
-loadEnv({ debug: process.env.NODE_ENV !== "production" });
+loadEnv({ debug: process.env.NODE_ENV !== "production", encoding: "utf-8" });
 
 const EnvSchema = z
 	.object({
@@ -47,8 +47,8 @@ const EnvSchema = z
 const parsed = EnvSchema.safeParse(process.env);
 if (!parsed.success) {
 	console.error(
-		"❌ Environment variable validation failed:",
-		parsed.error.format()
+		"Environment variable validation failed:",
+		z.treeifyError(parsed.error)
 	);
 	process.exit(1);
 }

@@ -13,7 +13,7 @@ const config: Config.InitialOptions = {
 	moduleNameMapper: {
 		"^@config/(.*)$": "<rootDir>/src/config/$1",
 		"^@modules/(.*)$": "<rootDir>/src/modules/$1",
-		"^@utils/(.*)$": "<rootDir>/src/utils/$1",
+		"^@shared/(.*)$": "<rootDir>/src/shared/$1",
 		"^@app$": "<rootDir>/src/app.ts",
 		"^@fastify/sensible$": "<rootDir>/jest.setup.ts",
 	},

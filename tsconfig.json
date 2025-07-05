@@ -13,7 +13,7 @@
 		"paths": {
 			"@config/*": ["config/*"],
 			"@modules/*": ["modules/*"],
-			"@utils/*": ["utils/*"],
+			"@shared/*": ["shared/*"],
 			"@app": ["app.ts"]
 		}
 	},

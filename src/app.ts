@@ -2,10 +2,10 @@ import docs from "@config/docs";
 import { env } from "@config/env";
 import errorHandler from "@config/error-handler";
 import { helmetConfig } from "@config/helmet";
-import { httpClient } from "@config/http-client";
+import { httpClient } from "@config/http-clients";
 import { logger } from "@config/logger";
 import routes from "@modules/index";
-import { isProduction } from "@utils/is-production";
+import { isProduction } from "shared/utils/is-production";
 import fastify from "fastify";
 import {
 	serializerCompiler,
